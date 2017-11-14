@@ -11,6 +11,7 @@ public class ParqueaderoApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		int a = 1+1;
 	}
 
 }
