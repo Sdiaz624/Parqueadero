@@ -1,6 +1,6 @@
 package com.ceiba.domain;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -16,18 +16,19 @@ public class Parqueadero implements Serializable {
 	private int id;
 	
 	@Column(name="fechaIngreso")
-	private Date fechaIngreso;
+	private LocalDateTime fechaIngreso;
 	
 	@Column(name="fechaSalida")
-	private Date fechaSalida;
-
-	@Column(name= "vehiculo")
+	private LocalDateTime fechaSalida;
+	
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "id")
 	private Vehiculo vehiculo;
 		
 	public Parqueadero() {
 	}
 
-	public Parqueadero(int id, Date fechaIngreso, Date fechaSalida, Vehiculo vehiculo) {
+	public Parqueadero(int id, LocalDateTime fechaIngreso, LocalDateTime fechaSalida, Vehiculo vehiculo) {
 		this.id = id;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
@@ -50,19 +51,19 @@ public class Parqueadero implements Serializable {
 		this.id = id;
 	}
 
-	public Date getFechaIngreso() {
+	public LocalDateTime getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(LocalDateTime fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public Date getFechaSalida() {
+	public LocalDateTime getFechaSalida() {
 		return fechaSalida;
 	}
 
-	public void setFechaSalida(Date fechaSalida) {
+	public void setFechaSalida(LocalDateTime fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 	
