@@ -1,6 +1,7 @@
-package com.ceiba.domain;
+package com.ceiba.Parqueadero.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 
 import javax.persistence.*;
 
@@ -12,19 +13,19 @@ public class Parqueadero implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id", precision=5)
+	@Column(name="PARQUEADERO_ID", precision=5)
 	private int id;
 	
-	@Column(name="fechaIngreso")
+	@Column(name="FECHAINGRESO")
 	private LocalDateTime fechaIngreso;
 	
-	@Column(name="fechaSalida")
+	@Column(name="FEHCASALIDA")
 	private LocalDateTime fechaSalida;
 	
-	@OneToMany(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "VEHICULO_ID")
 	private Vehiculo vehiculo;
-		
+			
 	public Parqueadero() {
 	}
 

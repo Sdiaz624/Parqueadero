@@ -1,5 +1,7 @@
-package com.ceiba.domain;
+package com.ceiba.Parqueadero.domain;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -11,27 +13,39 @@ public class Vehiculo implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id", precision=4)
+	@Column(name="VEHICULO_ID", precision=4)
 	private int id;
 	
-	@Column(name="placa")
+	@Column(name="PLACA")
 	private String placa;
 			
-	@Column(name="tipoVehiculo")
+	@Column(name="TIPOVEHICULO")
 	private char tipoVehiculo;
 	
-	@Column (name="cilindraje")
-	private int cilindraje;	
-		
+	@Column (name="CILINDRAJE")
+	private int cilindraje;
+	
+	@OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+	private List<Parqueadero> parqueadero = new ArrayList<Parqueadero>();
+ 
 	public Vehiculo() {
 	}
-	
+			
 	public Vehiculo(int id, String placa, char tipoVehiculo, int cilindraje) {
 		super();
 		this.id = id;
 		this.placa = placa;
 		this.tipoVehiculo = tipoVehiculo;
 		this.cilindraje = cilindraje;
+	}
+
+
+	public List<Parqueadero> getParqueadero() {
+		return parqueadero;
+	}
+
+	public void setParqueadero(ArrayList<Parqueadero> parqueadero) {
+		this.parqueadero = parqueadero;
 	}
 
 	public int getId() {
