@@ -50,7 +50,7 @@ public class Vehiculo implements Serializable{
 		return parqueadero;
 	}
 
-	public void setParqueadero(ArrayList<Parqueadero> parqueadero) {
+	public void setParqueadero(List<Parqueadero> parqueadero) {
 		this.parqueadero = parqueadero;
 	}
 

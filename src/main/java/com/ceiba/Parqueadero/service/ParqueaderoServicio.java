@@ -107,7 +107,7 @@ public class ParqueaderoServicio {
 	 * @param Valordia
 	 * @return
 	 */
-	public double totalAPagar(int horas, Double valor,Double Valordia) {
+	public double totalAPagar(int horas, Double valor,Double valorDia) {
 		
 		double total = 0;
 						
@@ -118,7 +118,7 @@ public class ParqueaderoServicio {
 				total = 8000;
 			}
 			if(horas>=24) {
-				total = totalAPagar(horas-24, valor,Valordia) + Valordia;
+				total = totalAPagar(horas-24, valor,valorDia) + valorDia;
 			}
 		}
 		
