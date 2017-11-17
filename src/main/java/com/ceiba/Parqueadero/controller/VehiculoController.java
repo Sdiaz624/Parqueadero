@@ -23,9 +23,9 @@ public class VehiculoController {
 		return null	;
 	}
 
-	@GetMapping(value = "/consultar/{vehiculo}")
+/*	@GetMapping(value = "/consultar/{vehiculo}")
 	public ResponseEntity<Vehiculo> consultar(@PathVariable int vehiculo) {
 		return ResponseEntity.ok().body(vehiculoServicio.consultar(vehiculo));	
-	}
+	}*/
 
 }

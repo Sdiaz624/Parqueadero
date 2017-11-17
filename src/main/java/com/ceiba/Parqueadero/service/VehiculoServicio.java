@@ -14,12 +14,4 @@ public class VehiculoServicio {
 	
 	}
 	
-	public void salidaVehiculo(int vehiculo) {
-		
-	}
-	
-	public Vehiculo consultar(int vehiculo) {
-		return null;
-	}
-	
 }

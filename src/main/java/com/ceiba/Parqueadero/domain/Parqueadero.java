@@ -19,9 +19,12 @@ public class Parqueadero implements Serializable {
 	@Column(name="FECHAINGRESO")
 	private LocalDateTime fechaIngreso;
 	
-	@Column(name="FEHCASALIDA")
+	@Column(name="FECHASALIDA")
 	private LocalDateTime fechaSalida;
 	
+	@Column(name="TOTAL")
+	private double total;
+		
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VEHICULO_ID")
 	private Vehiculo vehiculo;
@@ -34,6 +37,14 @@ public class Parqueadero implements Serializable {
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
 		this.vehiculo = vehiculo;
+	}
+	
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
 	public Vehiculo getVehiculo() {
