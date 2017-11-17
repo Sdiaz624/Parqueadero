@@ -27,7 +27,7 @@ public class Vehiculo implements Serializable{
 	private int cilindraje;
 	
 	@OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
-	private List<Parqueadero> parqueadero = new ArrayList<Parqueadero>();
+	private List<Parqueadero> parqueadero = new ArrayList<>();
  
 	public Vehiculo() {
 	}
