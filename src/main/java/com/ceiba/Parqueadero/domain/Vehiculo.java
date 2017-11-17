@@ -16,7 +16,8 @@ public class Vehiculo implements Serializable{
 	@Column(name="VEHICULO_ID", precision=4)
 	private int id;
 	
-	@Column(name="PLACA")
+	
+	@Column(name="PLACA", unique=true)
 	private String placa;
 			
 	@Column(name="TIPOVEHICULO")

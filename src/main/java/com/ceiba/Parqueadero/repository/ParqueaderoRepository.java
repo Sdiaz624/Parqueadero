@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.ceiba.Parqueadero.domain.Parqueadero;
 
 @Repository
-public interface ParqueaderoRepo extends CrudRepository<Parqueadero, Integer>{
+public interface ParqueaderoRepository extends CrudRepository<Parqueadero, Integer>{
 
-	public Parqueadero findByfechaSalida(LocalDateTime fechaSalida);
+	public Parqueadero findByFechaSalida(LocalDateTime fechaSalida);
 	
 	
 	
