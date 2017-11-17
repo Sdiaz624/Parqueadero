@@ -1,7 +1,7 @@
 package com.ceiba.parqueadero;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import com.ceiba.parqueadero.service.ParqueaderoServicio;
-import junit.framework.Assert;
 
 public class ParqueaderoApplicationTests {
 
@@ -17,7 +17,7 @@ public class ParqueaderoApplicationTests {
 		//act
 		double total = parqueaderoServicio.totalAPagar(horas,valor,valorDia);
 		//Assert
-		Assert.assertNotNull(total);		
+		assertNotNull(total);		
 		System.out.println(total);
 	}
 
