@@ -1,11 +1,10 @@
-package com.ceiba.Parqueadero.controller;
+package com.ceiba.parqueadero.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.ceiba.Parqueadero.service.ParqueaderoServicio;
+import com.ceiba.parqueadero.service.ParqueaderoServicio;
 
 @RestController
 @RequestMapping(value ="/parqueadero")

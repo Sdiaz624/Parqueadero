@@ -1,4 +1,4 @@
-package com.ceiba.Parqueadero.domain;
+package com.ceiba.parqueadero.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

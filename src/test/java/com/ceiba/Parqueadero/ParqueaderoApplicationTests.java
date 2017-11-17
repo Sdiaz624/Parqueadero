@@ -1,4 +1,4 @@
-package com.ceiba.Parqueadero;
+package com.ceiba.parqueadero;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.ceiba.Parqueadero.controller;
+package com.ceiba.parqueadero.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ceiba.Parqueadero.domain.Vehiculo;
-import com.ceiba.Parqueadero.service.VehiculoServicio;
+import com.ceiba.parqueadero.domain.Vehiculo;
+import com.ceiba.parqueadero.service.VehiculoServicio;
 
 @RestController
 @RequestMapping(value ="/vehiculo")

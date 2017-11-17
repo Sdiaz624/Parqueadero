@@ -1,7 +1,7 @@
-package com.ceiba.Parqueadero.service;
+package com.ceiba.parqueadero.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ceiba.Parqueadero.repository.ParqueaderoRepository;
+import com.ceiba.parqueadero.repository.ParqueaderoRepository;
 
 @Service
 public class ParqueaderoServicio {
