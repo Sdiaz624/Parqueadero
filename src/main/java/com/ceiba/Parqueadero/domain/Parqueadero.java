@@ -39,6 +39,11 @@ public class Parqueadero implements Serializable {
 		this.vehiculo = vehiculo;
 	}
 	
+	public Parqueadero(LocalDateTime fechaIngreso, Vehiculo vehiculo) {
+		this.fechaIngreso = fechaIngreso;
+		this.vehiculo = vehiculo;
+	}
+	
 	public double getTotal() {
 		return total;
 	}

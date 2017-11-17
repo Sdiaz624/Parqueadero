@@ -10,8 +10,33 @@ public class VehiculoServicio {
 	@Autowired
 	private VehiculoRepository vehiculoRespository;
 	
+	/**
+	 * 
+	 * @param vehiculo
+	 */
 	public void registrar(Vehiculo vehiculo) {
 	
+		Vehiculo vehiculoBase =vehiculoRespository.findByPlaca(vehiculo.getPlaca());
+		
+		if (vehiculoBase.equals(null)) {
+			
+			vehiculoRespository.save(vehiculo);
+			
+		}else {
+			return;
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param placa
+	 * @return
+	 */
+	public Vehiculo consultar(String placa) {
+		
+		return vehiculoRespository.findByPlaca(placa);
+				
 	}
 	
 }

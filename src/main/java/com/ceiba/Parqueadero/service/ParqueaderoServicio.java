@@ -17,16 +17,51 @@ public class ParqueaderoServicio {
 	@Autowired
 	private VehiculoRepository vehiculoRepository;
 		
+	/**
+	 * 
+	 * @param placa
+	 */
 	public void ingresoVehiculo(String placa) {
+		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
 		
-		if(!vehiculo.equals(null)){
+		if(!vehiculo.equals(null) && espacioEnElParqueadero(vehiculo.getTipoVehiculo())){
+						
+			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
 			
-			parqueaderoRepository.save(new Parqueadero(7,LocalDateTime.now(),null,vehiculo));
+			if(!parqueadero.equals(null)) {
+				
+				parqueaderoRepository.save(new Parqueadero(LocalDateTime.now(),vehiculo));
+			} else {
+				return;
+			}				
 			
 		}else {
 			return;
 		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param tipo
+	 * @return
+	 */
+	public boolean espacioEnElParqueadero(char tipo) {
+		
+		int total =parqueaderoRepository.findByTipo(tipo);
+		
+		if (tipo == 'M') {
+			if(total >= 10) {
+				return false;
+			}
+		}else {
+			if(total >= 20) {
+				return false;
+			}
+		}
+		
+		return true;
 		
 	}
 	
@@ -38,28 +73,39 @@ public class ParqueaderoServicio {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
 		
-		Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
-		
-		if(!parqueadero.equals(null)) {
+		if (!vehiculo.equals(null)) {
 			
-			parqueadero.setFechaSalida(LocalDateTime.now());
-			int horas = parqueadero.getFechaSalida().compareTo(parqueadero.getFechaIngreso());
-			if (vehiculo.getTipoVehiculo()=='M'){
-				parqueadero.setTotal(totalAPagar(horas,1000.00,8000.00));	
+			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
+			
+			if(!parqueadero.equals(null)) {
+				
+				parqueadero.setFechaSalida(LocalDateTime.now());
+				int horas = parqueadero.getFechaSalida().compareTo(parqueadero.getFechaIngreso());
+				if (vehiculo.getTipoVehiculo()=='M'){
+					parqueadero.setTotal(totalAPagar(horas,1000.00,8000.00));
+					if (vehiculo.getCilindraje()>500) {
+						parqueadero.setTotal(parqueadero.getTotal()+5000);
+					}
+				}
+				if (vehiculo.getTipoVehiculo()=='C') {
+					parqueadero.setTotal(totalAPagar(horas,500.00,6000.00));
+				}
+				parqueaderoRepository.save(parqueadero);
+							
+			}else {
+				return;
 			}
-			if (vehiculo.getTipoVehiculo()=='C') {
-				parqueadero.setTotal(totalAPagar(horas,500.00,6000.00));
-			}
-			parqueaderoRepository.save(parqueadero);
-						
 		}else {
 			return;
 		}
-		
 	}
 	
-	/*
+	/**
 	 * 
+	 * @param horas
+	 * @param valor
+	 * @param Valordia
+	 * @return
 	 */
 	public double totalAPagar(int horas, Double valor,Double Valordia) {
 		

@@ -13,11 +13,19 @@ public class ParqueaderoController {
 	@Autowired
 	private ParqueaderoServicio parqueaderoServicio;
 	
+	/**
+	 * 
+	 * @param placa
+	 */
 	@GetMapping(value ="/salida/{vehiculo}")
 	public void salidaDeVehiculo(@PathVariable String placa) {
 		parqueaderoServicio.salidaVehiculo(placa);
 	}
 	
+	/**
+	 * 
+	 * @param placa
+	 */
 	@GetMapping(value ="/ingreso/{vehiculo}")
 	public void ingresoDeVehiculo(@PathVariable String placa) {
 		parqueaderoServicio.ingresoVehiculo(placa);

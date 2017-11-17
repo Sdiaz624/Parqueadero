@@ -16,16 +16,26 @@ public class VehiculoController {
 
 	@Autowired
 	private VehiculoServicio vehiculoServicio;
-			
+	
+	/**
+	 * 
+	 * @param vehiculo
+	 * @return
+	 */
 	@PostMapping(value = "/registrar")
 	public ResponseEntity<Void> registrar(@RequestBody Vehiculo vehiculo) {
 		vehiculoServicio.registrar(vehiculo);
 		return null	;
 	}
 
-/*	@GetMapping(value = "/consultar/{vehiculo}")
-	public ResponseEntity<Vehiculo> consultar(@PathVariable int vehiculo) {
-		return ResponseEntity.ok().body(vehiculoServicio.consultar(vehiculo));	
-	}*/
+	/**
+	 * 
+	 * @param vehiculo
+	 * @return
+	 */
+	@GetMapping(value = "/consultar/{vehiculo}")
+	public ResponseEntity<Vehiculo> consultar(@PathVariable String placa) {
+		return ResponseEntity.ok().body(vehiculoServicio.consultar(placa));	
+	}
 
 }
