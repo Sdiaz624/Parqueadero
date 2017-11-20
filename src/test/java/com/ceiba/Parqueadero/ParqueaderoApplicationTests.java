@@ -12,12 +12,12 @@ public class ParqueaderoApplicationTests {
 		int horas = 50;
 		double valor =1000;
 		double valorDia = 8000;
-		//ParqueaderoServicio parqueaderoServicio =  new ParqueaderoServicio();
+		ParqueaderoServicio parqueaderoServicio =  new ParqueaderoServicio();
 		//act
-		//double total = parqueaderoServicio.totalAPagar(horas,valor,valorDia);
+		double total = parqueaderoServicio.totalAPagar(horas,valor,valorDia);
 		//Assert
-		//assertNotNull(total);		
-		//System.out.println(total);
+		assertNotNull(total);		
+		System.out.println(total);
 	}
 
 }
