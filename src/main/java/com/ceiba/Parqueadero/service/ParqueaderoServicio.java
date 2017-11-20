@@ -1,5 +1,6 @@
 package com.ceiba.parqueadero.service;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class ParqueaderoServicio {
 	}
 
 	public void guardarVehiculo(Vehiculo vehiculo) {
-		parqueaderoRepository.save(new Parqueadero(LocalDateTime.now(),vehiculo));
+		parqueaderoRepository.save(new Parqueadero(Calendar.getInstance(),vehiculo));
 	}
 
 	public boolean parqueaderoEsNulo(Parqueadero parqueadero) {
@@ -92,8 +93,8 @@ public class ParqueaderoServicio {
 			
 			if(!parqueaderoEsNulo(parqueadero)) {
 				
-				parqueadero.setFechaSalida(LocalDateTime.now());
-				int horas = parqueadero.getFechaSalida().compareTo(parqueadero.getFechaIngreso());
+				parqueadero.setFechaSalida(Calendar.getInstance());
+				long horas = horasACobrar(parqueadero);
 				if (vehiculo.getTipoVehiculo()=='M'){
 					salidaDeMoto(vehiculo, parqueadero, horas);
 				}
@@ -110,12 +111,21 @@ public class ParqueaderoServicio {
 		}
 	}
 
-	public double salidaDeCarro(Parqueadero parqueadero, int horas) {
+	public long horasACobrar(Parqueadero parqueadero) {
+		
+		return  diferenciaDeFechasEnMilisegundos(parqueadero)/3600000;
+	}
+	
+	public long diferenciaDeFechasEnMilisegundos(Parqueadero parqueadero) {
+		return parqueadero.getFechaSalida().getTimeInMillis()-parqueadero.getFechaIngreso().getTimeInMillis();
+	}
+		
+	public double salidaDeCarro(Parqueadero parqueadero, long horas) {
 		parqueadero.setTotal(totalAPagar(horas,1000.00,8000.00));
 		return parqueadero.getTotal();
 	}
 
-	public double salidaDeMoto(Vehiculo vehiculo, Parqueadero parqueadero, int horas) {
+	public double salidaDeMoto(Vehiculo vehiculo, Parqueadero parqueadero, long horas) {
 		parqueadero.setTotal(totalAPagar(horas,500.00,6000.00));
 		if (vehiculo.getCilindraje()>500) {
 			parqueadero.setTotal(parqueadero.getTotal()+5000);
@@ -130,7 +140,7 @@ public class ParqueaderoServicio {
 	 * @param Valordia
 	 * @return
 	 */
-	public double totalAPagar(int horas, Double valor,Double valorDia) {
+	public double totalAPagar(long horas, Double valor,Double valorDia) {
 		
 		double total = 0;
 						
