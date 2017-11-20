@@ -1,9 +1,6 @@
 package com.ceiba.parqueadero.domain;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity

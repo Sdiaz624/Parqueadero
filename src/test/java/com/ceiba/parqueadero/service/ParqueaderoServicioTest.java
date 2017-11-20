@@ -1,9 +1,5 @@
 package com.ceiba.parqueadero.service;
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import org.junit.Before;
 import org.junit.Test;
 import com.ceiba.parqueadero.domain.Parqueadero;
@@ -82,13 +78,21 @@ public class ParqueaderoServicioTest {
 	public void horasACobrar() {
 		//Arrange
 		Parqueadero parqueadero = new Parqueadero();
-		parqueadero.setId(25);
-		parqueadero.setTotal(450.0);
 		parqueadero.setFechaIngreso(Calendar.getInstance());
 		parqueadero.setFechaSalida(Calendar.getInstance());
 		
 		//Assert
 		Assert.assertEquals(0,(parqueaderoServicio.horasACobrar(parqueadero)));
+	}
+	
+	@Test
+	public void diferenciaEnMilisegundos() {
+		//Arrange
+		Parqueadero parqueadero = new Parqueadero();
+		parqueadero.setFechaIngreso(Calendar.getInstance());
+		parqueadero.setFechaSalida(Calendar.getInstance());
+		//Assert
+		Assert.assertNotNull(parqueaderoServicio.diferenciaDeFechasEnMilisegundos(parqueadero));
 	}
 	
 	
