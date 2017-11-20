@@ -12,11 +12,8 @@ public class ParqueaderoController {
 
 	@Autowired
 	public ParqueaderoServicio parqueaderoServicio;
-	    	
-	public void setDaoparqueaderoServicio(ParqueaderoServicio parqueaderoServicio) {
-		this.parqueaderoServicio = parqueaderoServicio;
-	}
-	
+	    
+
 	/**
 	 * 
 	 * @param placa
