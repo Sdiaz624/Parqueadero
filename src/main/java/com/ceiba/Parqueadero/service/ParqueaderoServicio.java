@@ -13,6 +13,7 @@ import com.ceiba.parqueadero.repository.VehiculoRepository;
 public class ParqueaderoServicio {
 
 	
+	
 	@Autowired
 	private ParqueaderoRepository parqueaderoRepository;
 	@Autowired

@@ -1,7 +1,5 @@
 package com.ceiba.parqueadero.repository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.ceiba.parqueadero.domain.Parqueadero;
 
@@ -15,18 +13,17 @@ public interface ParqueaderoRepository extends CrudRepository<Parqueadero, Integ
 	 */
 	
 	Parqueadero findByVehiculo(int vehiculo);
-	
-	/**
-	 * 
-	 * @param tipo
-	 * @return
-	 */
-	//@Query("SELECT COUNT(*) "
-	//	+  "FROM PARQUEADERO P ,"
-	//	+  "	 VEHICULO V "
-	//	+  "WHERE V.ID = P.VEHICULO_ID "
-	//	+  "AND   P.FECHASALIDA IS NULL "
-	//	+  "AND   V.TIPOVEHICULO = :TIPOVEHICULO ")
-	//int findByTipo(@Param("TIPOVEHICULO") char tipo);
-	
+//	
+//	/**
+//	 * 
+//	 * @param tipo
+//	 * @return
+//	 */
+//	@Query("SELECT COUNT(*) "
+//		+  "FROM PARQUEADERO P ,"
+//		+  "	 VEHICULO V "
+//		+  "WHERE V.ID = P.VEHICULO_ID "
+//		+  "AND   P.FECHASALIDA IS NULL "
+//		+  "AND   V.TIPOVEHICULO = :TIPOVEHICULO ")
+//	int findByTipoVehiculo(@Param("TIPOVEHICULO") char tipo);	
 }

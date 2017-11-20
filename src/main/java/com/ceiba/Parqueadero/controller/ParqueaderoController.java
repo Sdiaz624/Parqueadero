@@ -11,8 +11,12 @@ import com.ceiba.parqueadero.service.ParqueaderoServicio;
 public class ParqueaderoController {
 
 	@Autowired
-	private ParqueaderoServicio parqueaderoServicio;
+	public ParqueaderoServicio parqueaderoServicio;
 	    	
+	public void setDaoparqueaderoServicio(ParqueaderoServicio parqueaderoServicio) {
+		this.parqueaderoServicio = parqueaderoServicio;
+	}
+	
 	/**
 	 * 
 	 * @param placa

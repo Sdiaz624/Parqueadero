@@ -1,10 +1,20 @@
-package com.ceiba.parqueadero;
-import static org.junit.Assert.assertNotNull;
+package com.ceiba.parqueadero.service;
+import org.junit.Before;
 import org.junit.Test;
 import com.ceiba.parqueadero.service.ParqueaderoServicio;
+import junit.framework.Assert;
 
-public class ParqueaderoApplicationTests {
 
+public class ParqueaderoServicioTest {
+
+	ParqueaderoServicio parqueaderoServicio;
+	
+
+	@Before
+	public void setup(){
+		parqueaderoServicio =  new ParqueaderoServicio();
+	}
+		
 	@Test
 	public void notifyTest() {
 	
@@ -12,12 +22,12 @@ public class ParqueaderoApplicationTests {
 		int horas = 50;
 		double valor =1000;
 		double valorDia = 8000;
-		ParqueaderoServicio parqueaderoServicio =  new ParqueaderoServicio();
+		
 		//act
 		double total = parqueaderoServicio.totalAPagar(horas,valor,valorDia);
 		//Assert
-		assertNotNull(total);		
+		Assert.assertNotNull(total);		
 		System.out.println(total);
 	}
-
+	
 }

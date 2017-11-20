@@ -8,8 +8,9 @@ public interface VehiculoRepository extends CrudRepository<Vehiculo, Integer>{
 
 	
 	Vehiculo findByPlaca(String placa);
-	
-	
+		
 	int findByTipoVehiculo(String tipo);
+	
+	
 	
 }

@@ -22,20 +22,19 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+	 mavenCentral()
 	 jcenter()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+   	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testImplementation ('junit:junit:4.12')
    	testCompile ('org.mockito:mockito-core:2.+')
    	runtime('com.h2database:h2')
-   	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-   	
+   	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')	
 }
 
 test{
@@ -45,3 +44,11 @@ test{
 		}
 	reports.junitXml.destination = file("jacoco/test-results")
 }
+
+sourceSets {
+  main.java.srcDir "src/main"
+  test.java.srcDir "src/test"
+}
+
+
+
