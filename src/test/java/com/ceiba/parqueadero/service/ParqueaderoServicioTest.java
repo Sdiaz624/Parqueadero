@@ -52,5 +52,23 @@ public class ParqueaderoServicioTest {
 		Assert.assertEquals(14000.0, parqueaderoServicio.salidaDeMoto(vehiculo,parqueadero, horas));
 	}
 	
+	@Test
+	public void parqueaderoEsNulo() {
+		//Arrange
+		Parqueadero parqueadero = null;
+		//Assert
+		Assert.assertTrue(parqueaderoServicio.parqueaderoEsNulo(parqueadero));
+	}
+	
+	@Test
+	public void parqueaderoNoEsNulo() {
+		//Arrange
+		Parqueadero parqueadero = new Parqueadero();
+		parqueadero.setId(25);
+		parqueadero.setTotal(450.0);
+		//Assert
+		Assert.assertFalse(parqueaderoServicio.parqueaderoEsNulo(parqueadero));
+	}
+	
 	
 }

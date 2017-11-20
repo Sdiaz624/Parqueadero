@@ -31,7 +31,7 @@ public class ParqueaderoServicio {
 						
 			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
 			
-			if(validarParqueadero(parqueadero)) {
+			if(parqueaderoEsNulo(parqueadero)) {
 				guardarVehiculo(vehiculo);
 			} else {
 				return;
@@ -47,12 +47,12 @@ public class ParqueaderoServicio {
 		parqueaderoRepository.save(new Parqueadero(LocalDateTime.now(),vehiculo));
 	}
 
-	private boolean validarParqueadero(Parqueadero parqueadero) {
-		return !parqueadero.equals(null);
+	public boolean parqueaderoEsNulo(Parqueadero parqueadero) {
+		return parqueadero == null;
 	}
 
 	private boolean validarVehiculoYParqueadero(Vehiculo vehiculo) {
-		return !vehiculo.equals(null) && espacioEnElParqueadero(vehiculo.getTipoVehiculo());
+		return vehiculo!=null && espacioEnElParqueadero(vehiculo.getTipoVehiculo());
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class ParqueaderoServicio {
 			
 			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
 			
-			if(validarParqueadero(parqueadero)) {
+			if(!parqueaderoEsNulo(parqueadero)) {
 				
 				parqueadero.setFechaSalida(LocalDateTime.now());
 				int horas = parqueadero.getFechaSalida().compareTo(parqueadero.getFechaIngreso());
