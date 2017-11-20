@@ -2,6 +2,7 @@ package com.ceiba.parqueadero.service;
 import org.junit.Before;
 import org.junit.Test;
 import com.ceiba.parqueadero.domain.Parqueadero;
+import com.ceiba.parqueadero.domain.Vehiculo;
 import com.ceiba.parqueadero.service.ParqueaderoServicio;
 import junit.framework.Assert;
 
@@ -36,7 +37,19 @@ public class ParqueaderoServicioTest {
 		int horas = 10;
 		//act
 		//Assert
-		Assert.assertEquals(8000.0, parqueaderoServicio.SalidaDeCarro(parqueadero, horas));
+		Assert.assertEquals(8000.0, parqueaderoServicio.salidaDeCarro(parqueadero, horas));
+	}
+	
+	@Test
+	public void salidaDeMarro() {
+		//Arrange
+		Parqueadero parqueadero = new Parqueadero();
+		Vehiculo vehiculo = new Vehiculo();
+		vehiculo.setCilindraje(600);
+		int horas = 30;
+		//act
+		//Assert
+		Assert.assertEquals(14000.0, parqueaderoServicio.salidaDeMoto(vehiculo,parqueadero, horas));
 	}
 	
 	

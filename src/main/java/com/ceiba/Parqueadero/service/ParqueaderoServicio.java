@@ -27,12 +27,12 @@ public class ParqueaderoServicio {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
 		
-		if(ValidarVehiculoYParqueadero(vehiculo)){
+		if(validarVehiculoYParqueadero(vehiculo)){
 						
 			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
 			
-			if(ValidarParqueadero(parqueadero)) {
-				GuardarVehiculo(vehiculo);
+			if(validarParqueadero(parqueadero)) {
+				guardarVehiculo(vehiculo);
 			} else {
 				return;
 			}				
@@ -43,15 +43,15 @@ public class ParqueaderoServicio {
 		
 	}
 
-	public void GuardarVehiculo(Vehiculo vehiculo) {
+	public void guardarVehiculo(Vehiculo vehiculo) {
 		parqueaderoRepository.save(new Parqueadero(LocalDateTime.now(),vehiculo));
 	}
 
-	private boolean ValidarParqueadero(Parqueadero parqueadero) {
+	private boolean validarParqueadero(Parqueadero parqueadero) {
 		return !parqueadero.equals(null);
 	}
 
-	private boolean ValidarVehiculoYParqueadero(Vehiculo vehiculo) {
+	private boolean validarVehiculoYParqueadero(Vehiculo vehiculo) {
 		return !vehiculo.equals(null) && espacioEnElParqueadero(vehiculo.getTipoVehiculo());
 	}
 	
@@ -90,15 +90,15 @@ public class ParqueaderoServicio {
 			
 			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
 			
-			if(ValidarParqueadero(parqueadero)) {
+			if(validarParqueadero(parqueadero)) {
 				
 				parqueadero.setFechaSalida(LocalDateTime.now());
 				int horas = parqueadero.getFechaSalida().compareTo(parqueadero.getFechaIngreso());
 				if (vehiculo.getTipoVehiculo()=='M'){
-					SalidaDeMoto(vehiculo, parqueadero, horas);
+					salidaDeMoto(vehiculo, parqueadero, horas);
 				}
 				if (vehiculo.getTipoVehiculo()=='C') {
-					SalidaDeCarro(parqueadero, horas);
+					salidaDeCarro(parqueadero, horas);
 				}
 				parqueaderoRepository.save(parqueadero);
 							
@@ -110,16 +110,17 @@ public class ParqueaderoServicio {
 		}
 	}
 
-	public double SalidaDeCarro(Parqueadero parqueadero, int horas) {
+	public double salidaDeCarro(Parqueadero parqueadero, int horas) {
 		parqueadero.setTotal(totalAPagar(horas,1000.00,8000.00));
 		return parqueadero.getTotal();
 	}
 
-	private void SalidaDeMoto(Vehiculo vehiculo, Parqueadero parqueadero, int horas) {
+	public double salidaDeMoto(Vehiculo vehiculo, Parqueadero parqueadero, int horas) {
 		parqueadero.setTotal(totalAPagar(horas,500.00,6000.00));
 		if (vehiculo.getCilindraje()>500) {
 			parqueadero.setTotal(parqueadero.getTotal()+5000);
 		}
+		return parqueadero.getTotal();
 	}
 	
 	/**
