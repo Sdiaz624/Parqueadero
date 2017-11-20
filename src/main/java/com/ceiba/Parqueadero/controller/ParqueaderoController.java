@@ -18,7 +18,7 @@ public class ParqueaderoController {
 	 * 
 	 * @param placa
 	 */
-	@GetMapping(value ="/salida/{vehiculo}")
+	@GetMapping(value ="/salida/{placa}")
 	public void salidaDeVehiculo(@PathVariable String placa) {
 		parqueaderoServicio.salidaVehiculo(placa);
 	}
@@ -27,7 +27,7 @@ public class ParqueaderoController {
 	 * 
 	 * @param placa
 	 */
-	@GetMapping(value ="/ingreso/{vehiculo}")
+	@GetMapping(value ="/ingreso/{placa}")
 	public void ingresoDeVehiculo(@PathVariable String placa) {
 		parqueaderoServicio.ingresoVehiculo(placa);
 	}	

@@ -18,7 +18,7 @@ public class VehiculoServicio {
 	
 		Vehiculo vehiculoBase =vehiculoRespository.findByPlaca(vehiculo.getPlaca());
 		
-		if (validarVehiculo(vehiculoBase)) {
+		if (vehiculoEsNulo(vehiculoBase)) {
 			
 			vehiculoRespository.save(vehiculo);
 			
@@ -28,8 +28,8 @@ public class VehiculoServicio {
 		
 	}
 
-	public boolean validarVehiculo(Vehiculo vehiculoBase) {
-		return vehiculoBase.equals(null);
+	public boolean vehiculoEsNulo(Vehiculo vehiculoBase) {
+		return vehiculoBase==null;
 	}
 	
 	/**

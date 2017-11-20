@@ -33,7 +33,7 @@ public class VehiculoController {
 	 * @param vehiculo
 	 * @return
 	 */
-	@GetMapping(value = "/consultar/{vehiculo}")
+	@GetMapping(value = "/consultar/{placa}")
 	public ResponseEntity<Vehiculo> consultar(@PathVariable String placa) {
 		return ResponseEntity.ok().body(vehiculoServicio.consultar(placa));	
 	}

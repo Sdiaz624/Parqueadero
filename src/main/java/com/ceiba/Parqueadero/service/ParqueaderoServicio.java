@@ -84,7 +84,7 @@ public class ParqueaderoServicio {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
 		
-		if (!vehiculo.equals(null)) {
+		if (!vehiculoEsNulo(vehiculo)) {
 			
 			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
 			
@@ -153,6 +153,10 @@ public class ParqueaderoServicio {
 		}
 		
 		return total;
+	}
+	
+	public boolean vehiculoEsNulo(Vehiculo vehiculoBase) {
+		return vehiculoBase==null;
 	}
 	
 }
