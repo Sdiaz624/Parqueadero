@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ceiba.parqueadero.domain.Vehiculo;
+import com.ceiba.parqueadero.service.ParqueaderoServicio;
 import com.ceiba.parqueadero.service.VehiculoServicio;
 
 @RestController
 @RequestMapping(value ="/vehiculo")
 public class VehiculoController {
-
+	
 	@Autowired
 	private VehiculoServicio vehiculoServicio;
-	
-	/**
+
+   	/**
 	 * 
 	 * @param vehiculo
 	 * @return

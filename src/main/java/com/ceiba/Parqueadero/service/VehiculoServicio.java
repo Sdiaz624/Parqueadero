@@ -6,10 +6,10 @@ import com.ceiba.parqueadero.repository.VehiculoRepository;
 
 @Service
 public class VehiculoServicio {
-	
+		
 	@Autowired
 	private VehiculoRepository vehiculoRespository;
-	
+		
 	/**
 	 * 
 	 * @param vehiculo

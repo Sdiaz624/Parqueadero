@@ -12,6 +12,7 @@ import com.ceiba.parqueadero.repository.VehiculoRepository;
 @Service
 public class ParqueaderoServicio {
 
+	
 	@Autowired
 	private ParqueaderoRepository parqueaderoRepository;
 	@Autowired
@@ -49,7 +50,7 @@ public class ParqueaderoServicio {
 	 */
 	public boolean espacioEnElParqueadero(char tipo) {
 		
-		int total =parqueaderoRepository.findByTipo(tipo);
+		int total =0; //parqueaderoRepository.findByTipo(tipo);
 		
 		if (tipo == 'M') {
 			if(total >= 10) {

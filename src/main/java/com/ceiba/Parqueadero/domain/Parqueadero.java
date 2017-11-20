@@ -1,8 +1,6 @@
 package com.ceiba.parqueadero.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-
 import javax.persistence.*;
 
 @Entity

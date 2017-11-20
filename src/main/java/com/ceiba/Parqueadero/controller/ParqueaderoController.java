@@ -12,7 +12,7 @@ public class ParqueaderoController {
 
 	@Autowired
 	private ParqueaderoServicio parqueaderoServicio;
-	
+	    	
 	/**
 	 * 
 	 * @param placa

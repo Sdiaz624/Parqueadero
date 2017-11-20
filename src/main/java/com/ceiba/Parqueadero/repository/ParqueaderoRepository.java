@@ -13,6 +13,7 @@ public interface ParqueaderoRepository extends CrudRepository<Parqueadero, Integ
 	 * @param vehiculo
 	 * @return
 	 */
+	
 	Parqueadero findByVehiculo(int vehiculo);
 	
 	/**
@@ -20,12 +21,12 @@ public interface ParqueaderoRepository extends CrudRepository<Parqueadero, Integ
 	 * @param tipo
 	 * @return
 	 */
-	@Query("SELECT COUNT(*)"
-		+  "FROM PARQUEADERO P,"
-		+  "	 VEHICULO V"
-		+  "WHERE V.ID =P.VEHICULO_ID"
-		+  "AND   P.FECHASALIDA IS NULL"
-		+  "AND   V.TIPOVEHICULO = :TIPOVEHICULO")
-	int findByTipo(@Param("TIPOVEHICULO") char tipo);
+	//@Query("SELECT COUNT(*) "
+	//	+  "FROM PARQUEADERO P ,"
+	//	+  "	 VEHICULO V "
+	//	+  "WHERE V.ID = P.VEHICULO_ID "
+	//	+  "AND   P.FECHASALIDA IS NULL "
+	//	+  "AND   V.TIPOVEHICULO = :TIPOVEHICULO ")
+	//int findByTipo(@Param("TIPOVEHICULO") char tipo);
 	
 }
