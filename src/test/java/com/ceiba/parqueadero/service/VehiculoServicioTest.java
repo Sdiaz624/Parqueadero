@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import com.ceiba.parqueadero.domain.Vehiculo;
+import com.ceiba.parqueadero.domain.VehiculoTestBuilder;
 
 public class VehiculoServicioTest {
 
@@ -26,7 +27,7 @@ public class VehiculoServicioTest {
 	@Test
 	public void vehiculoNOEsNulo() {
 		//Arrange
-		Vehiculo vehiculo = new Vehiculo();
+		Vehiculo vehiculo = new VehiculoTestBuilder().buildCarro();
 		//Assert
 		assertFalse(vehiculoServicio.vehiculoEsNulo(vehiculo));		
 	}

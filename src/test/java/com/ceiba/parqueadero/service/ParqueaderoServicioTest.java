@@ -7,7 +7,9 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 import com.ceiba.parqueadero.domain.Parqueadero;
+import com.ceiba.parqueadero.domain.ParqueaderoTestBuilder;
 import com.ceiba.parqueadero.domain.Vehiculo;
+import com.ceiba.parqueadero.domain.VehiculoTestBuilder;
 import com.ceiba.parqueadero.service.ParqueaderoServicio;
 
 
@@ -49,12 +51,10 @@ public class ParqueaderoServicioTest {
 	@Test
 	public void salidaDeMoto() {
 		//Arrange
-		Parqueadero parqueadero = new Parqueadero();
-		Vehiculo vehiculo = new Vehiculo();
-		vehiculo.setCilindraje(600);
+		Parqueadero parqueadero = new ParqueaderoTestBuilder().buildSalida();
 		int horas = 30;
 		//act
-		int Salida = (int)parqueaderoServicio.salidaDeMoto(vehiculo,parqueadero, horas);
+		int Salida = (int)parqueaderoServicio.salidaDeMoto(parqueadero.getVehiculo(),parqueadero, horas);
 		//Assert		
 		assertEquals(14000,Salida);
 		
@@ -71,12 +71,7 @@ public class ParqueaderoServicioTest {
 	@Test
 	public void parqueaderoNoEsNulo() {
 		//Arrange
-		Parqueadero parqueadero = new Parqueadero();
-		parqueadero.setId(25);
-		parqueadero.setTotal(450.0);
-		parqueadero.setFechaIngreso(Calendar.getInstance());
-		parqueadero.setFechaSalida(Calendar.getInstance());
-		
+		Parqueadero parqueadero = new ParqueaderoTestBuilder().buildSalida();
 		//Assert
 		assertFalse(parqueaderoServicio.parqueaderoEsNulo(parqueadero));
 	}
@@ -84,10 +79,7 @@ public class ParqueaderoServicioTest {
 	@Test
 	public void horasACobrar() {
 		//Arrange
-		Parqueadero parqueadero = new Parqueadero();
-		parqueadero.setFechaIngreso(Calendar.getInstance());
-		parqueadero.setFechaSalida(Calendar.getInstance());
-		
+		Parqueadero parqueadero =new ParqueaderoTestBuilder().buildSalida();
 		//Assert
 		assertEquals(0,(parqueaderoServicio.horasACobrar(parqueadero)));
 	}
@@ -95,9 +87,7 @@ public class ParqueaderoServicioTest {
 	@Test
 	public void diferenciaEnMilisegundos() {
 		//Arrange
-		Parqueadero parqueadero = new Parqueadero();
-		parqueadero.setFechaIngreso(Calendar.getInstance());
-		parqueadero.setFechaSalida(Calendar.getInstance());
+		Parqueadero parqueadero = new ParqueaderoTestBuilder().buildSalida();
 		//Assert
 		assertNotNull(parqueaderoServicio.diferenciaDeFechasEnMilisegundos(parqueadero));
 	}
@@ -113,7 +103,7 @@ public class ParqueaderoServicioTest {
 	@Test
 	public void vehiculoNOEsNulo() {
 		//Arrange
-		Vehiculo vehiculo = new Vehiculo();
+		Vehiculo vehiculo =new VehiculoTestBuilder().buildCarro();
 		//Assert
 		assertFalse(parqueaderoServicio.vehiculoEsNulo(vehiculo));		
 	}
