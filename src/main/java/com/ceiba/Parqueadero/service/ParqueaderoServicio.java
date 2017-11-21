@@ -61,12 +61,12 @@ public class ParqueaderoServicio {
 		
 		int total = parqueaderoRepository.findByTipoVehiculoQuery(tipo);
 		
-		if (tipo == constante.moto) {
-			if(total >= constante.cantidadMaximaDeMotos) {
+		if (tipo == constante.MOTO) {
+			if(total >= constante.CANTIDAD_MAXIMA_DE_CARROS) {
 				return false;
 			}
 		}else {
-			if(total >= constante.cantidadMaximaDeMotos) {
+			if(total >= constante.CANTIDAD_MAXIMO_DE_MOTOS) {
 				return false;
 			}
 		}
@@ -91,10 +91,10 @@ public class ParqueaderoServicio {
 				
 				parqueadero.setFechaSalida(Calendar.getInstance());
 				long horas = horasACobrar(parqueadero);
-				if (vehiculo.getTipoVehiculo()==constante.moto){
+				if (vehiculo.getTipoVehiculo()==constante.MOTO){
 					salidaDeMoto(vehiculo, parqueadero, horas);
 				}
-				if (vehiculo.getTipoVehiculo()==constante.carro) {
+				if (vehiculo.getTipoVehiculo()==constante.CARRO) {
 					salidaDeCarro(parqueadero, horas);
 				}
 				parqueaderoRepository.save(parqueadero);			
@@ -104,7 +104,7 @@ public class ParqueaderoServicio {
 
 	public long horasACobrar(Parqueadero parqueadero) {
 		
-		return  diferenciaDeFechasEnMilisegundos(parqueadero)/constante.milisegundosEnHoras;
+		return  diferenciaDeFechasEnMilisegundos(parqueadero)/constante.MILISEGUNDOS_EN_HORAS;
 	}
 	
 	public long diferenciaDeFechasEnMilisegundos(Parqueadero parqueadero) {
@@ -112,14 +112,14 @@ public class ParqueaderoServicio {
 	}
 		
 	public double salidaDeCarro(Parqueadero parqueadero, long horas) {
-		parqueadero.setTotal(totalAPagar(horas,constante.valorHoraCarro,constante.valorDiaCarro));
+		parqueadero.setTotal(totalAPagar(horas,constante.VALOR_HORA_CARRO,constante.VALOR_DIA_CARRO));
 		return parqueadero.getTotal();
 	}
 
 	public double salidaDeMoto(Vehiculo vehiculo, Parqueadero parqueadero, long horas) {
-		parqueadero.setTotal(totalAPagar(horas,constante.valorHoraMoto,constante.valorDiaMoto));
-		if (vehiculo.getCilindraje()>constante.altoCilindraje) {
-			parqueadero.setTotal(parqueadero.getTotal()+constante.valorExcedenteAltoCilindraje);
+		parqueadero.setTotal(totalAPagar(horas,constante.VALOR_HORA_MOTO,constante.VALOR_DIA_MOTO));
+		if (vehiculo.getCilindraje()>constante.ALTO_CILINDRAJE) {
+			parqueadero.setTotal(parqueadero.getTotal()+constante.VALOR_EXCEDENTE_ALTO_CILINDRAJE);
 		}
 		return parqueadero.getTotal();
 	}
@@ -135,14 +135,14 @@ public class ParqueaderoServicio {
 		
 		double total = 0;
 						
-		if (horas < constante.cantidadHorasDiaEnParqueadero ) {
+		if (horas < constante.CANTIDAD_HORAS_DIA_EN_EL_PARQUEADERO ) {
 			total = horas*valor;
 		}else {
-			if(horas>=constante.cantidadHorasDiaEnParqueadero && horas<constante.cantidadHorasDia) {
+			if(horas>=constante.CANTIDAD_HORAS_DIA_EN_EL_PARQUEADERO && horas<constante.CANTIDAD_HORAS_DIA) {
 				total = valorDia;
 			}
-			if(horas>=constante.cantidadHorasDia) {
-				total = totalAPagar(horas-constante.cantidadHorasDia, valor,valorDia) + valorDia;
+			if(horas>=constante.CANTIDAD_HORAS_DIA) {
+				total = totalAPagar(horas-constante.CANTIDAD_HORAS_DIA, valor,valorDia) + valorDia;
 			}
 		}
 		
