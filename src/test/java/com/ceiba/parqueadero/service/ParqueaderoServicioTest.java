@@ -109,7 +109,7 @@ public class ParqueaderoServicioTest {
 		//Assert
 		assertTrue(parqueaderoServicio.vehiculoEsNulo(vehiculo));		
 	}
-	
+		
 	@Test
 	public void vehiculoNOEsNulo() {
 		//Arrange

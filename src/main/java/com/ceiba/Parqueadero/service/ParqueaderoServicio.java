@@ -2,6 +2,8 @@ package com.ceiba.parqueadero.service;
 import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ceiba.parqueadero.constantes.Constantes;
 import com.ceiba.parqueadero.domain.Parqueadero;
 import com.ceiba.parqueadero.domain.Vehiculo;
 import com.ceiba.parqueadero.repository.ParqueaderoRepository;
@@ -16,6 +18,8 @@ public class ParqueaderoServicio {
 	private ParqueaderoRepository parqueaderoRepository;
 	@Autowired
 	private VehiculoRepository vehiculoRepository;
+	
+	private Constantes constante;
 		
 	/**
 	 * 
@@ -31,12 +35,7 @@ public class ParqueaderoServicio {
 			
 			if(parqueaderoEsNulo(parqueadero)) {
 				guardarVehiculo(vehiculo);
-			} else {
-				return;
-			}				
-			
-		}else {
-			return;
+			}			
 		}
 		
 	}
@@ -62,12 +61,12 @@ public class ParqueaderoServicio {
 		
 		int total = parqueaderoRepository.findByTipoVehiculoQuery(tipo);
 		
-		if (tipo == 'M') {
-			if(total >= 10) {
+		if (tipo == constante.moto) {
+			if(total >= constante.cantidadMaximaDeMotos) {
 				return false;
 			}
 		}else {
-			if(total >= 20) {
+			if(total >= constante.cantidadMaximaDeMotos) {
 				return false;
 			}
 		}
@@ -92,25 +91,20 @@ public class ParqueaderoServicio {
 				
 				parqueadero.setFechaSalida(Calendar.getInstance());
 				long horas = horasACobrar(parqueadero);
-				if (vehiculo.getTipoVehiculo()=='M'){
+				if (vehiculo.getTipoVehiculo()==constante.moto){
 					salidaDeMoto(vehiculo, parqueadero, horas);
 				}
-				if (vehiculo.getTipoVehiculo()=='C') {
+				if (vehiculo.getTipoVehiculo()==constante.carro) {
 					salidaDeCarro(parqueadero, horas);
 				}
-				parqueaderoRepository.save(parqueadero);
-							
-			}else {
-				return;
+				parqueaderoRepository.save(parqueadero);			
 			}
-		}else {
-			return;
 		}
 	}
 
 	public long horasACobrar(Parqueadero parqueadero) {
 		
-		return  diferenciaDeFechasEnMilisegundos(parqueadero)/3600000;
+		return  diferenciaDeFechasEnMilisegundos(parqueadero)/constante.milisegundosEnHoras;
 	}
 	
 	public long diferenciaDeFechasEnMilisegundos(Parqueadero parqueadero) {
@@ -118,14 +112,14 @@ public class ParqueaderoServicio {
 	}
 		
 	public double salidaDeCarro(Parqueadero parqueadero, long horas) {
-		parqueadero.setTotal(totalAPagar(horas,1000.00,8000.00));
+		parqueadero.setTotal(totalAPagar(horas,constante.valorHoraCarro,constante.valorDiaCarro));
 		return parqueadero.getTotal();
 	}
 
 	public double salidaDeMoto(Vehiculo vehiculo, Parqueadero parqueadero, long horas) {
-		parqueadero.setTotal(totalAPagar(horas,500.00,6000.00));
-		if (vehiculo.getCilindraje()>500) {
-			parqueadero.setTotal(parqueadero.getTotal()+5000);
+		parqueadero.setTotal(totalAPagar(horas,constante.valorHoraMoto,constante.valorDiaMoto));
+		if (vehiculo.getCilindraje()>constante.altoCilindraje) {
+			parqueadero.setTotal(parqueadero.getTotal()+constante.valorExcedenteAltoCilindraje);
 		}
 		return parqueadero.getTotal();
 	}
@@ -141,14 +135,14 @@ public class ParqueaderoServicio {
 		
 		double total = 0;
 						
-		if (horas < 9 ) {
+		if (horas < constante.cantidadHorasDiaEnParqueadero ) {
 			total = horas*valor;
 		}else {
-			if(horas>=9 && horas<24) {
+			if(horas>=constante.cantidadHorasDiaEnParqueadero && horas<constante.cantidadHorasDia) {
 				total = valorDia;
 			}
-			if(horas>=24) {
-				total = totalAPagar(horas-24, valor,valorDia) + valorDia;
+			if(horas>=constante.cantidadHorasDia) {
+				total = totalAPagar(horas-constante.cantidadHorasDia, valor,valorDia) + valorDia;
 			}
 		}
 		
