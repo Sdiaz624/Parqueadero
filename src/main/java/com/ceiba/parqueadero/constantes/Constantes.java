@@ -2,7 +2,7 @@ package com.ceiba.parqueadero.constantes;
 
 
 public class Constantes {
-	
+			
 	public static final char moto = 'M';
 	
 	public static final char carro = 'C';
@@ -28,7 +28,9 @@ public class Constantes {
 	public static final int cantidadHorasDia = 24;
 	
 	public static final int cantidadHorasDiaEnParqueadero = 9;
-	
-	
-	
+
+	private Constantes() {
+		
+	}
+		
 }
