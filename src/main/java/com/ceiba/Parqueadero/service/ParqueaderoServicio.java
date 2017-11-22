@@ -1,6 +1,8 @@
 package com.ceiba.parqueadero.service;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -163,17 +165,17 @@ public class ParqueaderoServicio {
 	 * @param placa
 	 * @return
 	 */
-	public ArrayList<Parqueadero> consultarParqueadero(String placa) {
+	public List<Parqueadero> consultarParqueadero(String placa) {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
 		
-		ArrayList<Parqueadero> Parqueaderos = null; 
+		ArrayList<Parqueadero> parqueaderos = null; 
 		
 		if(!vehiculoEsNulo(vehiculo)) {
-			Parqueaderos = 	parqueaderoRepository.findByVehiculo(vehiculo);
+			parqueaderos = 	parqueaderoRepository.findByVehiculo(vehiculo);
 		}
 		
-		return Parqueaderos;
+		return parqueaderos;
 	}
 	
 }
