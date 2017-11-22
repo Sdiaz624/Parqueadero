@@ -52,10 +52,26 @@ public class ParqueaderoControllerTest {
 
 	@Test
 	@Transactional
-	public void SimularEntrada() throws Exception {
+	public void SimularEntradaYSalida() throws Exception {
 		
 		mockMvc.perform(get("/parqueadero/ingreso/AD4K83K")).andExpect(status().isOk());
 		mockMvc.perform(get("/parqueadero/salida/AD4K83K")).andExpect(status().isOk());
+	}
+	
+	@Test
+	@Transactional
+	public void SimularEntradaNoEfectiva() throws Exception {
+		
+		mockMvc.perform(get("/parqueadero/ingreso/A4K83K")).andExpect(status().isBadRequest());
+		
+	}
+	
+	@Test
+	@Transactional
+	public void SimularSalidaNoEfectiva() throws Exception {
+		
+		mockMvc.perform(get("/parqueadero/salida/A4K83K")).andExpect(status().isBadRequest());
+		
 	}
 
 }
