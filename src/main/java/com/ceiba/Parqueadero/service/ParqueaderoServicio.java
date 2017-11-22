@@ -26,7 +26,7 @@ public class ParqueaderoServicio {
 	 * 
 	 * @param placa
 	 */
-	public void ingresoVehiculo(String placa) {
+	public Parqueadero ingresoVehiculo(String placa) {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
 		int totalTipoVehiculosEnElParqueadero = parqueaderoRepository.findByTipoVehiculoQuery(vehiculo.getTipoVehiculo());
@@ -36,16 +36,17 @@ public class ParqueaderoServicio {
 			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculoQuery(vehiculo.getId());
 			
 			if(parqueaderoEsNulo(parqueadero)) {
-				guardarVehiculo(vehiculo);
+				return guardarVehiculo(vehiculo);
 			}
 					
-		}
-		
-		
+		}		
+		return null;
 	}
 
-	public void guardarVehiculo(Vehiculo vehiculo) {
-		parqueaderoRepository.save(new Parqueadero(Calendar.getInstance(),vehiculo));
+	public Parqueadero guardarVehiculo(Vehiculo vehiculo) {
+		Parqueadero parqueadero = new Parqueadero(Calendar.getInstance(),vehiculo);
+		parqueaderoRepository.save(parqueadero);
+		return parqueadero;
 	}
 
 	public boolean parqueaderoEsNulo(Parqueadero parqueadero) {
@@ -81,7 +82,7 @@ public class ParqueaderoServicio {
 	 * 
 	 * @param placa
 	 */
-	public void salidaVehiculo(String placa) {
+	public Parqueadero salidaVehiculo(String placa) {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
 		
@@ -99,9 +100,11 @@ public class ParqueaderoServicio {
 				if (vehiculo.getTipoVehiculo()==constante.CARRO) {
 					salidaDeCarro(parqueadero, horas);
 				}
-				parqueaderoRepository.save(parqueadero);			
+				parqueaderoRepository.save(parqueadero);
+				return parqueadero;
 			}
 		}
+		return null;
 	}
 
 	public long horasACobrar(Parqueadero parqueadero) {

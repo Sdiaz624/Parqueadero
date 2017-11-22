@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceiba.parqueadero.domain.Parqueadero;
-import com.ceiba.parqueadero.domain.Vehiculo;
 import com.ceiba.parqueadero.service.ParqueaderoServicio;
 
 @RestController
@@ -26,9 +25,16 @@ public class ParqueaderoController {
 	 * @param placa
 	 */
 	@GetMapping(value ="/salida/{placa}")
-	public ResponseEntity<Void> salidaDeVehiculo(@PathVariable String placa) {
-		parqueaderoServicio.salidaVehiculo(placa);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	public ResponseEntity<Parqueadero> salidaDeVehiculo(@PathVariable String placa) {
+		
+		Parqueadero parqueadero = parqueaderoServicio.salidaVehiculo(placa);
+		
+		if (parqueaderoServicio.parqueaderoEsNulo(parqueadero)) {
+			return ResponseEntity.badRequest().header("Error", "10" ).body(parqueadero);
+		}else {
+			return ResponseEntity.ok().body(parqueadero);
+		}
+		
 	}
 	
 	/**
@@ -36,9 +42,16 @@ public class ParqueaderoController {
 	 * @param placa
 	 */
 	@GetMapping(value ="/ingreso/{placa}")
-	public ResponseEntity<Void> ingresoDeVehiculo(@PathVariable String placa) {
-		parqueaderoServicio.ingresoVehiculo(placa);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	public ResponseEntity<Parqueadero> ingresoDeVehiculo(@PathVariable String placa) {
+				
+		Parqueadero parqueadero = parqueaderoServicio.ingresoVehiculo(placa);
+		
+		if (parqueaderoServicio.parqueaderoEsNulo(parqueadero)) {
+			return ResponseEntity.badRequest().header("Error", "10" ).body(parqueadero);
+		}else {
+			return ResponseEntity.ok().body(parqueadero);
+		}
+		
 	}	
 	
 	@GetMapping(value = "/consultar/{placa}")
