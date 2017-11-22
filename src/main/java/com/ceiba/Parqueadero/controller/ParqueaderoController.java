@@ -1,5 +1,5 @@
 package com.ceiba.parqueadero.controller;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +54,7 @@ public class ParqueaderoController {
 	}	
 	
 	@GetMapping(value = "/consultar/{placa}")
-	public ResponseEntity<ArrayList<Parqueadero>> consultar(@PathVariable String placa) {
+	public ResponseEntity<List<Parqueadero>> consultar(@PathVariable String placa) {
 		return ResponseEntity.ok().body(parqueaderoServicio.consultarParqueadero(placa));	
 		
 	}
