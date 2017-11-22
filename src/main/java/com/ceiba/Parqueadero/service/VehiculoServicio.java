@@ -16,7 +16,7 @@ public class VehiculoServicio {
 	 */
 	public Vehiculo registrar(Vehiculo vehiculo) {
 	
-		Vehiculo vehiculoBase =vehiculoRespository.findByPlaca(vehiculo.getPlaca());
+		Vehiculo vehiculoBase = vehiculoRespository.findByPlaca(vehiculo.getPlaca());
 		
 		if (vehiculoEsNulo(vehiculoBase)) {
 			

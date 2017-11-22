@@ -16,7 +16,6 @@ import com.ceiba.parqueadero.repository.VehiculoRepository;
 public class ParqueaderoServicio {
 
 	
-	
 	@Autowired
 	private ParqueaderoRepository parqueaderoRepository;
 	@Autowired
@@ -45,16 +44,31 @@ public class ParqueaderoServicio {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param vehiculo
+	 * @return
+	 */
 	public Parqueadero guardarVehiculo(Vehiculo vehiculo) {
 		Parqueadero parqueadero = new Parqueadero(Calendar.getInstance(),vehiculo);
 		parqueaderoRepository.save(parqueadero);
 		return parqueadero;
 	}
 
+	/**
+	 * 
+	 * @param parqueadero
+	 * @return
+	 */
 	public boolean parqueaderoEsNulo(Parqueadero parqueadero) {
 		return parqueadero == null;
 	}
-
+	/**
+	 * 
+	 * @param vehiculo
+	 * @param totalTipoVehiculosEnElParqueadero
+	 * @return
+	 */
 	private boolean validarVehiculoYParqueadero(Vehiculo vehiculo,int totalTipoVehiculosEnElParqueadero) {
 		return vehiculo!=null && espacioEnElParqueadero(vehiculo.getTipoVehiculo(),totalTipoVehiculosEnElParqueadero);
 	}
@@ -109,20 +123,43 @@ public class ParqueaderoServicio {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param parqueadero
+	 * @return
+	 */
 	public long horasACobrar(Parqueadero parqueadero) {
 		
 		return  diferenciaDeFechasEnMilisegundos(parqueadero)/constante.MILISEGUNDOS_EN_HORAS;
 	}
 	
+	/**
+	 * 
+	 * @param parqueadero
+	 * @return
+	 */
 	public long diferenciaDeFechasEnMilisegundos(Parqueadero parqueadero) {
 		return parqueadero.getFechaSalida().getTimeInMillis()-parqueadero.getFechaIngreso().getTimeInMillis();
 	}
 		
+	/**
+	 * 
+	 * @param parqueadero
+	 * @param horas
+	 * @return
+	 */
 	public double salidaDeCarro(Parqueadero parqueadero, long horas) {
 		parqueadero.setTotal(totalAPagar(horas,constante.VALOR_HORA_CARRO,constante.VALOR_DIA_CARRO));
 		return parqueadero.getTotal();
 	}
 
+	/**
+	 * 
+	 * @param vehiculo
+	 * @param parqueadero
+	 * @param horas
+	 * @return
+	 */
 	public double salidaDeMoto(Vehiculo vehiculo, Parqueadero parqueadero, long horas) {
 		parqueadero.setTotal(totalAPagar(horas,constante.VALOR_HORA_MOTO,constante.VALOR_DIA_MOTO));
 		if (vehiculo.getCilindraje()>constante.ALTO_CILINDRAJE) {

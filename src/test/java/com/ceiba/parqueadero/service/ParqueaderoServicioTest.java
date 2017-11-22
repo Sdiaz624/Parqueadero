@@ -3,26 +3,29 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.ceiba.parqueadero.ParqueaderoApplication;
 import com.ceiba.parqueadero.domain.Parqueadero;
 import com.ceiba.parqueadero.domain.ParqueaderoTestBuilder;
 import com.ceiba.parqueadero.domain.Vehiculo;
 import com.ceiba.parqueadero.domain.VehiculoTestBuilder;
 import com.ceiba.parqueadero.service.ParqueaderoServicio;
 
-
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ParqueaderoApplication.class)
 public class ParqueaderoServicioTest {
 	
-	
+	@Autowired
 	ParqueaderoServicio parqueaderoServicio;
-	
-	@Before
-	public void setup(){
-		parqueaderoServicio =  new ParqueaderoServicio();
-	}
-		
+	@Autowired
+	VehiculoServicio vehiculoServicio;
+			
 	@Test
 	public void totalAPagar() {
 	

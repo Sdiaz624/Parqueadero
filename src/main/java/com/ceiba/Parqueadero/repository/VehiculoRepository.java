@@ -5,11 +5,8 @@ import com.ceiba.parqueadero.domain.Vehiculo;
 
 @Repository
 public interface VehiculoRepository extends CrudRepository<Vehiculo, Integer>{
-
 	
 	Vehiculo findByPlaca(String placa);
 		
-	int findByTipoVehiculo(String tipo);
-		
-	
+	int findByTipoVehiculo(String tipo);	
 }
