@@ -1,4 +1,5 @@
 package com.ceiba.parqueadero.service;
+import java.util.ArrayList;
 import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +32,8 @@ public class ParqueaderoServicio {
 		int totalTipoVehiculosEnElParqueadero = parqueaderoRepository.findByTipoVehiculoQuery(vehiculo.getTipoVehiculo());
 		
 		if(validarVehiculoYParqueadero(vehiculo, totalTipoVehiculosEnElParqueadero)){
-						
-			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
 		
+			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculoQuery(vehiculo.getId());
 			
 			if(parqueaderoEsNulo(parqueadero)) {
 				guardarVehiculo(vehiculo);
@@ -87,7 +87,7 @@ public class ParqueaderoServicio {
 		
 		if (!vehiculoEsNulo(vehiculo)) {
 			
-			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
+			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculoQuery(vehiculo.getId());
 			
 			if(!parqueaderoEsNulo(parqueadero)) {
 				
@@ -151,8 +151,26 @@ public class ParqueaderoServicio {
 		return total;
 	}
 	
-	public boolean vehiculoEsNulo(Vehiculo vehiculoBase) {
-		return vehiculoBase==null;
+	public boolean vehiculoEsNulo(Vehiculo vehiculo) {
+		return vehiculo==null;
+	}
+	
+	/**
+	 * 
+	 * @param placa
+	 * @return
+	 */
+	public ArrayList<Parqueadero> consultarParqueadero(String placa) {
+		
+		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
+		
+		ArrayList<Parqueadero> Parqueaderos = null; 
+		
+		if(!vehiculoEsNulo(vehiculo)) {
+			Parqueaderos = 	parqueaderoRepository.findByVehiculo(vehiculo);
+		}
+		
+		return Parqueaderos;
 	}
 	
 }
