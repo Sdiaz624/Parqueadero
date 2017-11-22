@@ -23,10 +23,8 @@ public class Vehiculo implements Serializable{
 	
 	@Column (name="CILINDRAJE")
 	private int cilindraje;
-	/*
-	@OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
-	private List<Parqueadero> parqueadero = new ArrayList<>();
- 	*/
+	
+	
 	public Vehiculo() {
 	}
 			
@@ -42,15 +40,7 @@ public class Vehiculo implements Serializable{
 		this.tipoVehiculo = tipoVehiculo;
 		this.cilindraje = cilindraje;
 	}
-	/*
-	public List<Parqueadero> getParqueadero() {
-		return parqueadero;
-	}
-
-	public void setParqueadero(List<Parqueadero> parqueadero) {
-		this.parqueadero = parqueadero;
-	}
-	 */
+	
 	public int getId() {
 		return id;
 	}
