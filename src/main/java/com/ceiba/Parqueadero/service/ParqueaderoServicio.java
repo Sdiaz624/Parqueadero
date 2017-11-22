@@ -30,14 +30,20 @@ public class ParqueaderoServicio {
 	public Parqueadero ingresoVehiculo(String placa) {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
-		int totalTipoVehiculosEnElParqueadero = parqueaderoRepository.findByTipoVehiculoQuery(vehiculo.getTipoVehiculo());
 		
-		if(validarVehiculoYParqueadero(vehiculo, totalTipoVehiculosEnElParqueadero)){
 		
-			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculoQuery(vehiculo.getId());
+		if(!vehiculoEsNulo(vehiculo)){
 			
-			if(parqueaderoEsNulo(parqueadero)) {
-				return guardarVehiculo(vehiculo);
+			int totalTipoVehiculosEnElParqueadero = parqueaderoRepository.findByTipoVehiculoQuery(vehiculo.getTipoVehiculo());
+			
+			if (espacioEnElParqueadero(vehiculo.getTipoVehiculo(),totalTipoVehiculosEnElParqueadero)) {
+				
+				Parqueadero parqueadero =  parqueaderoRepository.findByVehiculoQuery(vehiculo.getId());
+				
+				if(parqueaderoEsNulo(parqueadero)) {
+					return guardarVehiculo(vehiculo);
+				}
+				
 			}
 					
 		}		
@@ -62,15 +68,6 @@ public class ParqueaderoServicio {
 	 */
 	public boolean parqueaderoEsNulo(Parqueadero parqueadero) {
 		return parqueadero == null;
-	}
-	/**
-	 * 
-	 * @param vehiculo
-	 * @param totalTipoVehiculosEnElParqueadero
-	 * @return
-	 */
-	private boolean validarVehiculoYParqueadero(Vehiculo vehiculo,int totalTipoVehiculosEnElParqueadero) {
-		return vehiculo!=null && espacioEnElParqueadero(vehiculo.getTipoVehiculo(),totalTipoVehiculosEnElParqueadero);
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package com.ceiba.parqueadero.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import com.ceiba.parqueadero.domain.Parqueadero;
 import com.ceiba.parqueadero.domain.ParqueaderoTestBuilder;
 import com.ceiba.parqueadero.domain.Vehiculo;
 import com.ceiba.parqueadero.domain.VehiculoTestBuilder;
+import com.ceiba.parqueadero.repository.ParqueaderoRepository;
+import com.ceiba.parqueadero.repository.VehiculoRepository;
 import com.ceiba.parqueadero.service.ParqueaderoServicio;
 
 @RunWith(SpringRunner.class)
@@ -23,6 +26,8 @@ public class ParqueaderoServicioTest {
 	
 	@Autowired
 	ParqueaderoServicio parqueaderoServicio;
+	@Autowired
+	VehiculoRepository vehculoRepository;
 	@Autowired
 	VehiculoServicio vehiculoServicio;
 			
@@ -132,6 +137,24 @@ public class ParqueaderoServicioTest {
 	public void EspacioParaMoto() {
 		//Assert		
 		assertTrue(parqueaderoServicio.espacioEnElParqueadero('M',9));		
+	}
+	
+	@Test
+	public void ingresarVehiculoNoExistente() {
+		//Arrange
+		Vehiculo vehiculo = new VehiculoTestBuilder().buildWithPlaca("ASDFG");
+		//Assert
+		assertNull(parqueaderoServicio.ingresoVehiculo(vehiculo.getPlaca()));
+	}
+	
+	@Test
+	public void ingresarVehiculoExistente() {
+		//Arrenge
+		Vehiculo vehiculo = new VehiculoTestBuilder().buildWithPlaca("AD4K83K");
+		//vehculoRepository.save(vehiculo);
+		//Assert
+		assertNotNull(parqueaderoServicio.ingresoVehiculo(vehiculo.getPlaca()));
+		parqueaderoServicio.salidaVehiculo(vehiculo.getPlaca());
 	}
 	
 }
