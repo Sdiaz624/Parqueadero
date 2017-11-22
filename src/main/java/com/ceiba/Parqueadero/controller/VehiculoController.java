@@ -43,7 +43,14 @@ public class VehiculoController {
 	 */
 	@GetMapping(value = "/consultar/{placa}")
 	public ResponseEntity<Vehiculo> consultar(@PathVariable String placa) {
-		return ResponseEntity.ok().body(vehiculoServicio.consultar(placa));	
+		
+		Vehiculo vehiculo = vehiculoServicio.consultar(placa);
+		
+		if (vehiculoServicio.vehiculoEsNulo(vehiculo)) {
+			return ResponseEntity.badRequest().header("Error", "10" ).body(vehiculo);
+		}else {
+			return ResponseEntity.ok().body(vehiculo);
+		}		
 		
 	}
 

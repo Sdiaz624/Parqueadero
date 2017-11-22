@@ -53,7 +53,14 @@ public class VehiculoControllerTest {
 		@Transactional
 		public void consultarVehiculo() throws Exception {
 
-			mockMvc.perform(get("/vehiculo/consultar/AD4K8K3")).andExpect(status().isOk());
+			mockMvc.perform(get("/vehiculo/consultar/AD4K83K")).andExpect(status().isOk());
+		}
+		
+		@Test
+		@Transactional
+		public void consultarVehiculoNoEfecitov() throws Exception {
+
+			mockMvc.perform(get("/vehiculo/consultar/AD4K8Kc3")).andExpect(status().isBadRequest());
 		}
 
 	
