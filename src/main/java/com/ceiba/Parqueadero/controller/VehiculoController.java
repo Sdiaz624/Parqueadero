@@ -1,5 +1,6 @@
 package com.ceiba.parqueadero.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +23,10 @@ public class VehiculoController {
 	 * @param vehiculo
 	 * @return
 	 */
-	@PostMapping(value = "/registrar")
+	@PostMapping(value = "/registrar",  consumes = "application/json")
 	public ResponseEntity<Void> registrar(@RequestBody Vehiculo vehiculo) {
 		vehiculoServicio.registrar(vehiculo);
-		return null	;
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
 	/**
@@ -36,6 +37,7 @@ public class VehiculoController {
 	@GetMapping(value = "/consultar/{placa}")
 	public ResponseEntity<Vehiculo> consultar(@PathVariable String placa) {
 		return ResponseEntity.ok().body(vehiculoServicio.consultar(placa));	
+		
 	}
 
 }

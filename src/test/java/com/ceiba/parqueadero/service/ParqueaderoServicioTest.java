@@ -108,4 +108,28 @@ public class ParqueaderoServicioTest {
 		assertFalse(parqueaderoServicio.vehiculoEsNulo(vehiculo));		
 	}
 	
+	@Test
+	public void NoHayEspacioParaCarro() {
+		//Assert		
+		assertFalse(parqueaderoServicio.espacioEnElParqueadero('C',20));		
+	}
+	
+	@Test
+	public void NoHayEspacioParaMoto() {
+		//Assert		
+		assertFalse(parqueaderoServicio.espacioEnElParqueadero('M',10));		
+	}
+	
+	@Test
+	public void EspacioParaCarro() {
+		//Assert		
+		assertTrue(parqueaderoServicio.espacioEnElParqueadero('C',18));		
+	}
+	
+	@Test
+	public void EspacioParaMoto() {
+		//Assert		
+		assertTrue(parqueaderoServicio.espacioEnElParqueadero('M',9));		
+	}
+	
 }

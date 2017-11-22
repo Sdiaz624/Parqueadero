@@ -14,8 +14,7 @@ public class Vehiculo implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="VEHICULO_ID", precision=4)
 	private int id;
-	
-	
+		
 	@Column(name="PLACA", unique=true)
 	private String placa;
 			

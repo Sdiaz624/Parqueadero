@@ -28,15 +28,19 @@ public class ParqueaderoServicio {
 	public void ingresoVehiculo(String placa) {
 		
 		Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa);
+		int totalTipoVehiculosEnElParqueadero = parqueaderoRepository.findByTipoVehiculoQuery(vehiculo.getTipoVehiculo());
 		
-		if(validarVehiculoYParqueadero(vehiculo)){
+		if(validarVehiculoYParqueadero(vehiculo, totalTipoVehiculosEnElParqueadero)){
 						
 			Parqueadero parqueadero =  parqueaderoRepository.findByVehiculo(vehiculo.getId());
+		
 			
 			if(parqueaderoEsNulo(parqueadero)) {
 				guardarVehiculo(vehiculo);
-			}			
+			}
+					
 		}
+		
 		
 	}
 
@@ -48,8 +52,8 @@ public class ParqueaderoServicio {
 		return parqueadero == null;
 	}
 
-	private boolean validarVehiculoYParqueadero(Vehiculo vehiculo) {
-		return vehiculo!=null && espacioEnElParqueadero(vehiculo.getTipoVehiculo());
+	private boolean validarVehiculoYParqueadero(Vehiculo vehiculo,int totalTipoVehiculosEnElParqueadero) {
+		return vehiculo!=null && espacioEnElParqueadero(vehiculo.getTipoVehiculo(),totalTipoVehiculosEnElParqueadero);
 	}
 	
 	/**
@@ -57,16 +61,14 @@ public class ParqueaderoServicio {
 	 * @param tipo
 	 * @return
 	 */
-	public boolean espacioEnElParqueadero(char tipo) {
-		
-		int total = parqueaderoRepository.findByTipoVehiculoQuery(tipo);
-		
-		if (tipo == constante.MOTO) {
-			if(total >= constante.CANTIDAD_MAXIMA_DE_CARROS) {
+	public boolean espacioEnElParqueadero(char tipo, int totalTipoVehiculosEnElParqueadero) {
+			
+		if (tipo == constante.CARRO) {
+			if(totalTipoVehiculosEnElParqueadero >= constante.CANTIDAD_MAXIMA_DE_CARROS) {
 				return false;
 			}
 		}else {
-			if(total >= constante.CANTIDAD_MAXIMO_DE_MOTOS) {
+			if(totalTipoVehiculosEnElParqueadero >= constante.CANTIDAD_MAXIMO_DE_MOTOS) {
 				return false;
 			}
 		}

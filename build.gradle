@@ -35,6 +35,9 @@ dependencies {
    	testCompile ('org.mockito:mockito-core:2.+')
    	runtime('com.h2database:h2')
    	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')	
+   	// https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2'
+	compile 'org.zalando:problem-spring-web:0.2.0'
 }
 
 test{
@@ -45,10 +48,6 @@ test{
 	reports.junitXml.destination = file("jacoco/test-results")
 }
 
-sourceSets {
-  main.java.srcDir "src/main"
-  test.java.srcDir "src/test"
-}
 
 
 
