@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableArgumentResolver;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
@@ -15,18 +14,13 @@ import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
+
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.ceiba.parqueadero.ParqueaderoApplication;
-import com.ceiba.parqueadero.domain.Vehiculo;
-import com.ceiba.parqueadero.domain.VehiculoTestBuilder;
-import com.ceiba.parqueadero.util.Util;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import org.springframework.http.MediaType;
-import java.nio.charset.StandardCharsets;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ParqueaderoApplication.class)
@@ -34,7 +28,7 @@ public class ParqueaderoControllerTest {
 
 	private MockMvc mockMvc;
 	@Autowired
-	private VehiculoController vehiculoController;
+	private ParqueaderoController parqueaderoController;
 	@Autowired
 	private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 	@Autowired
@@ -50,7 +44,7 @@ public class ParqueaderoControllerTest {
 
 	@Before
 	public void beforeTest() {
-		mockMvc = MockMvcBuilders.standaloneSetup(vehiculoController)
+		mockMvc = MockMvcBuilders.standaloneSetup(parqueaderoController)
 				.setCustomArgumentResolvers(pageableArgumentResolver)
 				.setConversionService(createFormattingConversionService()).setMessageConverters(jacksonMessageConverter)
 				.build();
@@ -58,9 +52,10 @@ public class ParqueaderoControllerTest {
 
 	@Test
 	@Transactional
-	public void createVehiculoWithExistingId() throws Exception {
-
-		mockMvc.perform(get("/vehiculo/consultar/AD4K8K3")).andExpect(status().isOk());
+	public void SimularEntrada() throws Exception {
+		
+		mockMvc.perform(get("/parqueadero/ingreso/AD4K8K3")).andExpect(status().isOk());
+		mockMvc.perform(get("/parqueadero/salida/AD4K8K3")).andExpect(status().isOk());
 	}
 
 }
