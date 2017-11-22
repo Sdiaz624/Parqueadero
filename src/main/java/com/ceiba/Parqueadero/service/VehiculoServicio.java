@@ -14,17 +14,17 @@ public class VehiculoServicio {
 	 * 
 	 * @param vehiculo
 	 */
-	public void registrar(Vehiculo vehiculo) {
+	public Vehiculo registrar(Vehiculo vehiculo) {
 	
 		Vehiculo vehiculoBase =vehiculoRespository.findByPlaca(vehiculo.getPlaca());
 		
 		if (vehiculoEsNulo(vehiculoBase)) {
 			
-			vehiculoRespository.save(vehiculo);
+			vehiculoBase = vehiculoRespository.save(vehiculo);
 			
-		}else {
-			return;
 		}
+		
+		return vehiculoBase;
 		
 	}
 

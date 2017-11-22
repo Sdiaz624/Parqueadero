@@ -24,9 +24,17 @@ public class VehiculoController {
 	 * @return
 	 */
 	@PostMapping(value = "/registrar",  consumes = "application/json")
-	public ResponseEntity<Void> registrar(@RequestBody Vehiculo vehiculo) {
-		vehiculoServicio.registrar(vehiculo);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	public ResponseEntity<Vehiculo> registrar(@RequestBody Vehiculo vehiculo) {
+		
+		Vehiculo vehiculoObj = vehiculoServicio.registrar(vehiculo);
+		
+		if (vehiculoServicio.vehiculoEsNulo(vehiculo)) {
+			return ResponseEntity.badRequest().header("Error", "10" ).body(vehiculoObj);
+		}else {
+			return ResponseEntity.ok().body(vehiculoObj);
+		}
+		
+		
 	}
 
 	/**

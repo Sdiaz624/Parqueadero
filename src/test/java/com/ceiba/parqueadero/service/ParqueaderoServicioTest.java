@@ -21,7 +21,6 @@ public class ParqueaderoServicioTest {
 	@Before
 	public void setup(){
 		parqueaderoServicio =  new ParqueaderoServicio();
-	
 	}
 		
 	@Test
