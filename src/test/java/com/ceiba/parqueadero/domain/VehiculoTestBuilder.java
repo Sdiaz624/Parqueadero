@@ -20,5 +20,8 @@ public class VehiculoTestBuilder {
 		return new Vehiculo (1141,this.placa,'M',this.cilindraje);
 	}
 	
+	public Vehiculo buildWithPlaca(String placa) {
+		return new Vehiculo (1141,placa,'M',this.cilindraje);
+	}
 	
 }

@@ -1,6 +1,7 @@
 package com.ceiba.parqueadero.service;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,9 +40,34 @@ public class VehiculoServicioTest {
 	public void ingresoVehiculo() {
 		
 		//Arrage
-		Vehiculo Carro = new VehiculoTestBuilder().buildCarro();
+		Vehiculo carro = new VehiculoTestBuilder().buildCarro();
 		//Assert
-		assertNotNull(vehiculoServicio.registrar(Carro));
+		assertNotNull(vehiculoServicio.registrar(carro));
 	}
+	@Test 
+	public void ingresoVehiculoNuevo() {
+		
+		//Arrage
+		Vehiculo carro = new VehiculoTestBuilder().buildWithPlaca("KOIL");
+		//Assert
+		assertNotNull(vehiculoServicio.registrar(carro));
+	}
+	@Test 
+	public void consultarPorPlaca() {
+		
+		//Arrage
+		Vehiculo carro = new VehiculoTestBuilder().buildCarro();
+		//Assert
+		assertNotNull(vehiculoServicio.consultar(carro.getPlaca()));
+	}
+	@Test 
+	public void consultarPorPlacaNoExistente() {
+		
+		//Assert
+		assertNull(vehiculoServicio.consultar("QWERTY"));
+	}
+	
+	
+	
 	
 }
