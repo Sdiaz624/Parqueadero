@@ -27,7 +27,7 @@ public class VehiculoController {
 		
 		Vehiculo vehiculoObj = vehiculoServicio.registrar(vehiculo);
 		
-		if (vehiculoServicio.vehiculoEsNulo(vehiculo)) {
+		if (vehiculoServicio.vehiculoEsNulo(vehiculoObj)) {
 			return ResponseEntity.badRequest().header("Error", "10" ).body(vehiculoObj);
 		}else {
 			return ResponseEntity.ok().body(vehiculoObj);
